@@ -1,6 +1,8 @@
 /dts-v1/;
 #include <nordic/nrf52840_qiaa.dtsi>
 
+#include <dt-bindings/led/led.h>
+
 / {
 	model = "Nordic nRF52840 Dongle SliceMK";
 
@@ -9,6 +11,15 @@
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zephyr,console = &cdc_acm_uart;
+		zmk,underglow = &led_strip;
+	};
+
+	// Define pin for controlling external power.
+	ext-power {
+		compatible = "zmk,ext-power-generic";
+		label = "EXT_POWER";
+		control-gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+		init-delay-ms = <50>;
 	};
 
 	kscan0: kscan {
@@ -61,5 +72,31 @@
 			label = "storage";
 			reg = <0x000ea000 0x0000a000>;
 		};
+	};
+};
+
+&spi0 {
+	compatible = "nordic,nrf-spim";
+	status = "okay";
+
+	// Define pin for LED data.
+	mosi-pin = <13>;
+
+	// Zephyr requires SCK and MISO to be defined but they are not used so pick
+	// two random unused pins.
+	sck-pin = <11>;
+	miso-pin = <14>;
+
+	led_strip: ws2812@0 {
+		compatible = "worldsemi,ws2812-spi";
+		label = "WS2812";
+
+		reg = <0>;
+		spi-max-frequency = <4000000>;
+
+		chain-length = <1>;
+		color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
+		spi-one-frame = <0x70>;
+		spi-zero-frame = <0x40>;
 	};
 };
