@@ -8,40 +8,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
-
-/ {
-    macros {
-        /**
-         * Temporarily switches to a layer (`&mo`) while a modifier is held.
-         * Analogous to QMK's `LM()`, using a parameterized macro.
-         *
-         * Params:
-         *  1. Layer to switch to
-         *  2. Modifier to press while layer is active
-         *
-         * Example:
-         *  `&lm NUM_LAYER LSHIFT`
-         */
-        lm: lm {
-            label = "LAYER_MOD";
-            compatible = "zmk,behavior-macro-two-param";
-            wait-ms = <0>;
-            tap-ms = <0>;
-            #binding-cells = <2>;
-            bindings
-                = <&macro_param_1to1>
-                , <&macro_press &mo MACRO_PLACEHOLDER>
-                , <&macro_param_2to1>
-                , <&macro_press &kp MACRO_PLACEHOLDER>
-                , <&macro_pause_for_release>
-                , <&macro_param_2to1>
-                , <&macro_release &kp MACRO_PLACEHOLDER>
-                , <&macro_param_1to1>
-                , <&macro_release &mo MACRO_PLACEHOLDER>
-                ;
-        };
-    };
-};
+#include <dt-bindings/zmk/rgb.h>
 
 / {
     behaviors {
@@ -72,7 +39,9 @@
 #define O_USB OUT_USB
 #define O_BLE OUT_BLE
 #define BT_S BT_SEL
-#define STAR ASTERISK
+#define BLUE RGB_COLOR_HSB(240,100,100)
+#define GREEN RGB_COLOR_HSB(120,100,100)
+#define RGBOFF RGB_COLOR_HSB(0,0,0)
 
 / {
 	keymap {
@@ -84,7 +53,7 @@
 	&kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T      &kp BRI_UP &kp M_VOLU &kp Y      &kp U      &kp I      &kp O      &kp P      &kp BSLH
 	&kp LCTL    &kp A      &kp S      &kp D      &kp F      &kp G                            &kp H      &kp J      &kp K      &kp L      &lt 2 SCLN &mt RGUI SQT
 	&kp LSFT    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp BRI_DN &kp M_VOLD &kp N      &kp M      &kp CMMA   &kp DOT    &kp FSLH   &kp RSFT
-	&none       &none      &mo 2      &kp LALT   &kp LGUI                                               &mo 1      &lm 1 RSFT &none      &none      &none
+	&none       &none      &mo2       &kp LALT   &kp LGUI                                               &mo1       &mo1sft     &none      &none      &none
 	                                                        &none      &none      &none      &none
 	                                             &kp SPC    &kp BKSP   &kp HOME   &kp PGUP   &kp RET    &kp SPC
 	                                                                   &kp END    &kp PGDN
@@ -119,4 +88,36 @@
 			>;
 		};
 	};
+
+    ZMK_MACRO(mo1sft,
+        bindings
+            = <&macro_press &mo 1>
+            , <&macro_press &kp RSFT>
+            , <&macro_press &rgb_ug BLUE>
+            , <&macro_pause_for_release>
+            , <&macro_press &rgb_ug RGBOFF>
+            , <&macro_release  &kp RSFT>
+            , <&macro_release &mo 1>
+            ;
+    )
+
+    ZMK_MACRO(mo1,
+        bindings
+            = <&macro_press &mo 1>
+            , <&macro_press &rgb_ug BLUE>
+            , <&macro_pause_for_release>
+            , <&macro_press &rgb_ug RGBOFF>
+            , <&macro_release &mo 1>
+            ;
+    )
+
+    ZMK_MACRO(mo2,
+        bindings
+            = <&macro_press &mo 2>
+            , <&macro_press &rgb_ug GREEN>
+            , <&macro_pause_for_release>
+            , <&macro_press &rgb_ug RGBOFF>
+            , <&macro_release &mo 2>
+            ;
+    )
 };
