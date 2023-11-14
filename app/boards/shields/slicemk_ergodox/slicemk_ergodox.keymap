@@ -22,7 +22,7 @@
         };
 
         // dm4: for macOS style Cmd-Delete
-        mide: minus_backspace {
+        mibs: minus_backspace {
             compatible = "zmk,behavior-mod-morph";
             label = "DM4_MINUS_BACKSPACE";
             #binding-cells = <0>;
@@ -49,7 +49,7 @@
 		layer_0 {
 			bindings = <
 	&bootloader
-	&escgr      &kp NUM_1  &kp NUM_2  &kp NUM_3  &kp NUM_4  &kp NUM_5  &none      &kp C_PP   &kp NUM_6  &kp NUM_7  &kp NUM_8  &kp NUM_9  &kp NUM_0  &mide
+	&escgr      &kp NUM_1  &kp NUM_2  &kp NUM_3  &kp NUM_4  &kp NUM_5  &none      &kp C_PP   &kp NUM_6  &kp NUM_7  &kp NUM_8  &kp NUM_9  &kp NUM_0  &mibs
 	&kp TAB     &kp Q      &kp W      &kp E      &kp R      &kp T      &kp BRI_UP &kp M_VOLU &kp Y      &kp U      &kp I      &kp O      &kp P      &kp BSLH
 	&kp LCTL    &kp A      &kp S      &kp D      &kp F      &kp G                            &kp H      &kp J      &kp K      &kp L      &lt 2 SCLN &mt RGUI SQT
 	&kp LSFT    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp BRI_DN &kp M_VOLD &kp N      &kp M      &kp CMMA   &kp DOT    &kp FSLH   &kp RSFT
