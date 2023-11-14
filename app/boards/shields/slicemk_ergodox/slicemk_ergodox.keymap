@@ -54,7 +54,7 @@
 	&kp LCTL    &kp A      &kp S      &kp D      &kp F      &kp G                            &kp H      &kp J      &kp K      &kp L      &lt 2 SCLN &mt RGUI SQT
 	&kp LSFT    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp BRI_DN &kp M_VOLD &kp N      &kp M      &kp CMMA   &kp DOT    &kp FSLH   &kp RSFT
 	&altgui     &none      &mo2       &kp LALT   &kp LGUI                                               &mo1       &mo1sft     &none      &none      &none
-	                                                        &none      &none      &none      &none
+	                                                        &none      &none      &kp LEFT   &kp RIGHT
 	                                             &kp SPC    &kp BKSP   &kp HOME   &kp PGUP   &kp RET    &kp SPC
 	                                                                   &kp END    &kp PGDN
 			>;
